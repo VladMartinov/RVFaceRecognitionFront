@@ -1,0 +1,26 @@
+$logo-shadow-animation: shadow-effect 7s infinite;
+$rotate: rotate 3s infinite linear;
+
+@keyframes shadow-effect {
+  0% {
+    filter: drop-shadow(0 0 45px rgba($logo-shadow-color, 0));
+  }
+  
+  50% {
+    filter: drop-shadow(0 0 45px $logo-shadow-color);
+  }
+
+  100% {
+    filter: drop-shadow(0 0 45px rgba($logo-shadow-color, 0));
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

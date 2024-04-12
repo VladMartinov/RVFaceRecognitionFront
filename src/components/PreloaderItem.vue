@@ -1,0 +1,120 @@
+<template>
+  <div class="preloader-wrapper" v-if="loading">
+    <span class="preloader"></span>
+  </div>
+</template>
+
+<script>
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+export default {
+  setup() {
+    const store = useStore();
+    const loading = computed(() => store.getters.loading);
+
+    return {
+      loading,
+    };
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.preloader-wrapper {
+  position: fixed;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: rgba($background-color, 0.75);
+
+  z-index: 10;
+}
+
+.preloader {
+  transform: rotateZ(45deg);
+  perspective: 1000px;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  color: $white;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+
+    top: 0;
+    left: 0;
+
+    width: inherit;
+    height: inherit;
+
+    border-radius: 50%;
+
+    transform: rotateX(70deg);
+    animation: 1s spin linear infinite;
+  }
+
+  &::after {
+    color: $primary-color;
+
+    transform: rotateY(70deg);
+    animation-delay: 0.4s;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateZ(360deg);
+  }
+}
+
+@keyframes rotateccw {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+@keyframes spin {
+  0%,
+  100% {
+    box-shadow: 0.2em 0px 0 0px currentcolor;
+  }
+  12% {
+    box-shadow: 0.2em 0.2em 0 0 currentcolor;
+  }
+  25% {
+    box-shadow: 0 0.2em 0 0px currentcolor;
+  }
+  37% {
+    box-shadow: -0.2em 0.2em 0 0 currentcolor;
+  }
+  50% {
+    box-shadow: -0.2em 0 0 0 currentcolor;
+  }
+  62% {
+    box-shadow: -0.2em -0.2em 0 0 currentcolor;
+  }
+  75% {
+    box-shadow: 0px -0.2em 0 0 currentcolor;
+  }
+  87% {
+    box-shadow: 0.2em -0.2em 0 0 currentcolor;
+  }
+}
+</style>
