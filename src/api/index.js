@@ -57,7 +57,10 @@ intercept(({ request, response }) => {
       let index = queue.findIndex((x) => _.isEqual(x.guid, guid));
       ~index && queue.splice(index, 1);
 
-      if (error.response.status === 401) {
+      if (
+        error.response.status === 401 &&
+        error.response.config.url !== "/authentication/login"
+      ) {
         try {
           const refreshResponse = await instance.post(
             "/authentication/refresh-token"

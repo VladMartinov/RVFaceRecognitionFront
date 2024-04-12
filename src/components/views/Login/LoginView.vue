@@ -63,12 +63,14 @@
 import { inject } from "vue";
 import { useLoginBlock, usePasswordBlock } from "./index.js";
 import { useRouter } from "vue-router";
+import { useNotification } from "@kyvg/vue3-notification";
 
 export default {
   name: "LoginView",
   setup() {
     const $api = inject("$api");
     const router = useRouter();
+    const { notify } = useNotification();
 
     const loginInfo = useLoginBlock();
     const passwordInfo = usePasswordBlock();
@@ -79,7 +81,13 @@ export default {
         .then(() => {
           router.push("/");
         })
-        .catch(() => {});
+        .catch(() => {
+          notify({
+            title: "Авторизация в систему",
+            text: "Авторизация не удалась! Попробуйте еще раз.",
+            type: "error",
+          });
+        });
     };
 
     return {

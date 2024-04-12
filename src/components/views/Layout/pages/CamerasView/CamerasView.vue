@@ -3,6 +3,7 @@
     <div class="cameras-tools">
       <BaseButton
         class="-secondary -super-small"
+        v-if="currentUser.userRole !== UserRoleEnum.Observer"
         :disabled="!websocket.core || saveImageStarted"
         @onClick="saveImage"
       >
@@ -104,6 +105,8 @@ import { ref, reactive, computed, onUnmounted, inject } from "vue";
 import { useNotification } from "@kyvg/vue3-notification";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+
+import { UserRoleEnum } from "@/utils/enums";
 import _ from "lodash";
 
 export default {
@@ -117,6 +120,8 @@ export default {
     const store = useStore();
     const router = useRouter();
     const { notify } = useNotification();
+
+    const currentUser = reactive(store.getters.currentUserInfo);
 
     const frame = ref(null);
     const fps = ref(0);
@@ -305,6 +310,9 @@ export default {
       // changeAsideInfoState,
 
       websocket,
+
+      currentUser,
+      UserRoleEnum,
 
       frame,
       fpsToView,

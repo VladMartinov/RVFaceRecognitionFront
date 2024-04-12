@@ -90,7 +90,7 @@ export default {
     });
 
     /* Pagination */
-    const pageCount = computed(() => Math.ceil(logs.getter().length / 10));
+    const pageCount = computed(() => Math.ceil(logs.getter().length / 20));
     const currentPage = ref(0);
 
     const bottomSliceIndex = ref(0);
@@ -122,8 +122,8 @@ export default {
     const selectPage = function (page) {
       currentPage.value = page;
 
-      bottomSliceIndex.value = (currentPage.value - 1) * 10;
-      topSliceIndex.value = currentPage.value * 10;
+      bottomSliceIndex.value = (currentPage.value - 1) * 20;
+      topSliceIndex.value = currentPage.value * 20;
     };
 
     const paginationValues = computed(() => {
