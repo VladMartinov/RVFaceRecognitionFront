@@ -12,7 +12,6 @@
     <nav class="navigation-list">
       <router-link to="/cameras">{{ $dictionary("cameras") }}</router-link>
       <router-link to="/images">{{ $dictionary("images") }}</router-link>
-      <!-- TODO: Убрать true из проверки -->
       <template v-if="user.userRole !== UserRoleEnum.User">
         <router-link to="/users">{{ $dictionary("users") }}</router-link>
         <router-link to="/activity-log">
